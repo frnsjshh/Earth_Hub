@@ -20,9 +20,9 @@ public class AppUser {
     private Long id;
 
     @Column (nullable = false, length = 100)
-    private String first_name;
+    private String firstName;
     @Column (nullable = false, length = 100)
-    private String last_name;
+    private String lastName;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
