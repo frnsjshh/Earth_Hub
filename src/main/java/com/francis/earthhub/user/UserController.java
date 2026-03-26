@@ -1,5 +1,8 @@
 package com.francis.earthhub.user;
 
+import com.francis.earthhub.user.dto.UserMapper;
+import com.francis.earthhub.user.dto.UserRequestDTO;
+import com.francis.earthhub.user.dto.UserResponseDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,24 +17,25 @@ public class UserController {
     }
 
     @PostMapping
-    public AppUser saveUser(@RequestBody AppUser user) {
-        return userService.saveUser(user);
+    public UserResponseDTO saveUser(@RequestBody UserRequestDTO userRequestDTO) {
+        return UserMapper.toResponseDTO(userService.saveUser(UserMapper.toEntity(userRequestDTO)));
     }
 
     @GetMapping
-    public List<AppUser> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserResponseDTO> getAllUsers() {
+        return userService.getAllUsers().stream()
+                .map(UserMapper::toResponseDTO)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public AppUser getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public UserResponseDTO getUserById(@PathVariable Long id) {
+        return UserMapper.toResponseDTO(userService.getUserById(id));
     }
 
     @PutMapping("/{id}")
-    public AppUser updateUser(@PathVariable Long id, @RequestBody AppUser user){
-
-        return userService.updateUser(id, user);
+    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+        return UserMapper.toResponseDTO(userService.updateUser(id, UserMapper.toEntity(userRequestDTO)));
     }
 
     @DeleteMapping("/{id}")
