@@ -1,5 +1,10 @@
 package com.francis.earthhub.event;
 
+import com.francis.earthhub.event.dto.EventMapper;
+import com.francis.earthhub.event.dto.EventRequestDTO;
+import com.francis.earthhub.event.dto.EventResponseDTO;
+import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -12,22 +17,27 @@ public class EventController {
     }
 
     @PostMapping
-    public VolunteerEvent saveEvent(@RequestBody VolunteerEvent event) {
-        return eventService.saveEvent(event);
+    public EventResponseDTO saveEvent(@Valid @RequestBody EventRequestDTO eventDTO) {
+        return EventMapper.toResponseDTO(eventService.saveEvent(EventMapper.toEntity(eventDTO), eventDTO.organizerId()));
     }
     @GetMapping
-    public Iterable<VolunteerEvent> getAllEvents() {
-        return eventService.getAllEvents();
+    public Page<EventResponseDTO> getAllEvents(
+            @RequestParam (defaultValue = "0") int page,
+            @RequestParam (defaultValue = "10") int size,
+            @RequestParam (defaultValue = "date") String sortBy
+    ) {
+        return eventService.getAllEvents(page, size, sortBy).map(EventMapper::toResponseDTO);
     }
-    @GetMapping("{id}")
-    public VolunteerEvent getEventById(@PathVariable Long id) {
-        return eventService.getEventById(id);
+    @GetMapping("/{id}")
+    public EventResponseDTO getEventById(@PathVariable Long id) {
+        return EventMapper.toResponseDTO(eventService.getEventById(id));
     }
-    @PutMapping("{id}")
-    public VolunteerEvent updateEvent(@PathVariable Long id, @RequestBody VolunteerEvent updateRequest) {
-        return eventService.updateEvent(id, updateRequest);
+    @PutMapping("/{id}")
+    public EventResponseDTO updateEvent(@PathVariable Long id, @Valid @RequestBody EventRequestDTO updateRequest) {
+        return EventMapper.toResponseDTO(eventService.updateEvent(id, EventMapper.toEntity(updateRequest)));
     }
-    @DeleteMapping("{id}")
+
+    @DeleteMapping("/{id}")
     public void deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
     }

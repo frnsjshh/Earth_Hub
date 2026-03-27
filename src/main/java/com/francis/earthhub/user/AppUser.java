@@ -1,7 +1,6 @@
 package com.francis.earthhub.user;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.francis.earthhub.event.VolunteerEvent;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -36,6 +35,5 @@ public class AppUser {
     private LocalDate joinDate;
 
     @OneToMany(mappedBy = "organizer")
-    @JsonIgnore
     private List<VolunteerEvent> volunteerEvents;
 }
