@@ -1,8 +1,7 @@
 package com.francis.earthhub.user;
 
-import org.springframework.http.HttpStatus;
+import com.francis.earthhub.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -23,18 +22,19 @@ public class UserService {
     }
 
     public AppUser getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found" + id));
     }
 
     public AppUser updateUser(Long id, AppUser updateRequest) {
         AppUser existingUser = userRepository.findById(id).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                orElseThrow(() -> new ResourceNotFoundException("User not found" + id));
 
         existingUser.setFirstName(updateRequest.getFirstName());
         existingUser.setLastName(updateRequest.getLastName());
         existingUser.setRole(updateRequest.getRole());
         return userRepository.save(existingUser);
     }
+
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);

@@ -1,6 +1,7 @@
 package com.francis.earthhub.user;
 
 
+import com.francis.earthhub.event.VolunteerEvent;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,4 +33,7 @@ public class AppUser {
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDate joinDate;
+
+    @OneToMany(mappedBy = "organizer")
+    private List<VolunteerEvent> volunteerEvents;
 }
