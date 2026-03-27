@@ -3,6 +3,7 @@ package com.francis.earthhub.user;
 import com.francis.earthhub.user.dto.UserMapper;
 import com.francis.earthhub.user.dto.UserRequestDTO;
 import com.francis.earthhub.user.dto.UserResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponseDTO saveUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public UserResponseDTO saveUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         return UserMapper.toResponseDTO(userService.saveUser(UserMapper.toEntity(userRequestDTO)));
     }
 
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+    public UserResponseDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO){
         return UserMapper.toResponseDTO(userService.updateUser(id, UserMapper.toEntity(userRequestDTO)));
     }
 

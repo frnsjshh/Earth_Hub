@@ -20,6 +20,7 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attendance_seq")
     @SequenceGenerator( name = "attendance_seq", sequenceName = "attendance_seq")
     private Long id;
+
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime registrationDateTime;
@@ -33,6 +34,5 @@ public class Attendance {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
-
 
 }
