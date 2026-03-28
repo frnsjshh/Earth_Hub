@@ -24,9 +24,10 @@ public class EventController {
     public Page<EventResponseDTO> getAllEvents(
             @RequestParam (defaultValue = "0") int page,
             @RequestParam (defaultValue = "10") int size,
-            @RequestParam (defaultValue = "date") String sortBy
+            @RequestParam (defaultValue = "date") String sortBy,
+            @RequestParam (required = false) String keyword
     ) {
-        return eventService.getAllEvents(page, size, sortBy).map(EventMapper::toResponseDTO);
+        return eventService.getAllEvents(page, size, sortBy,keyword).map(EventMapper::toResponseDTO);
     }
     @GetMapping("/{id}")
     public EventResponseDTO getEventById(@PathVariable Long id) {

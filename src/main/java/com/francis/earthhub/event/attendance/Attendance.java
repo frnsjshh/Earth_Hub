@@ -1,6 +1,7 @@
-package com.francis.earthhub.event;
+package com.francis.earthhub.event.attendance;
 
 
+import com.francis.earthhub.event.VolunteerEvent;
 import com.francis.earthhub.user.AppUser;
 import jakarta.persistence.*;
 import lombok.Getter;
