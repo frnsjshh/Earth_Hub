@@ -1,5 +1,7 @@
-package com.francis.earthhub.event;
+package com.francis.earthhub.event.attendance;
 
+import com.francis.earthhub.event.EventRepository;
+import com.francis.earthhub.event.VolunteerEvent;
 import com.francis.earthhub.exception.DuplicateResourceException;
 import com.francis.earthhub.exception.ResourceNotFoundException;
 import com.francis.earthhub.user.AppUser;

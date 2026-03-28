@@ -1,4 +1,4 @@
-package com.francis.earthhub.event;
+package com.francis.earthhub.event.attendance;
 
 import org.springframework.web.bind.annotation.*;
 

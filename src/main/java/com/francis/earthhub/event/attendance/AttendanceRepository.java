@@ -1,4 +1,5 @@
-package com.francis.earthhub.event;
+package com.francis.earthhub.event.attendance;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

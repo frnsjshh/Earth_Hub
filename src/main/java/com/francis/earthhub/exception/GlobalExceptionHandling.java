@@ -56,4 +56,13 @@ public class GlobalExceptionHandling {
         return error;
     }
 
+    @ExceptionHandler(OrganizerRoleRequiredException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN) //403
+    public Map<String, String> handleOrganizerRoleRequired(OrganizerRoleRequiredException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", "Organizer role required");
+        error.put("message", ex.getMessage());
+        return error;
+    }
+
 }
