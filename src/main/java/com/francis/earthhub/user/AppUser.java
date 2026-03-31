@@ -20,6 +20,10 @@ public class AppUser {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column (nullable = false, length = 100)
     private String firstName;
@@ -36,4 +40,6 @@ public class AppUser {
 
     @OneToMany(mappedBy = "organizer")
     private List<VolunteerEvent> volunteerEvents;
+
+
 }
