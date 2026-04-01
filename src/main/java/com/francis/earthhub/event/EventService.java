@@ -25,7 +25,7 @@ public class EventService {
     public VolunteerEvent saveEvent(VolunteerEvent event, Long organizerId) {
         AppUser organizer = userRepository.findById(organizerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer not found with ID: " + organizerId));
-        if(event.getOrganizer().getRole()!= Role.ORGANIZER) {
+        if(organizer.getRole()!= Role.ORGANIZER) {
             throw new OrganizerRoleRequiredException("User lacks the required permissions to organize an event.");
         }
         event.setOrganizer(organizer);
